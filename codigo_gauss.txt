@@ -1,0 +1,48 @@
+ program Gauss
+
+    implicit none
+    real(8), allocatable :: A(:,:), AB(:,:)
+    real(8), allocatable:: B(:), X(:)
+    integer::i,j,k,n
+    real(8) :: m
+    
+    n=4
+    allocate(A(n,n), B(n), X(n), AB(n,n+1))
+    
+    A(1,:) = (/2.d0, 3.d0, 4.d0, 5.d0/)
+    A(2,:) = (/6.d0, 15.d0, 19.d0, 23.d0/)
+    A(3,:) = (/8.d0, 42.d0, 60.d0, 70.d0/)
+    A(4,:) = (/12.d0, 60.d0, 1.d0, 17.d0/)
+    
+    b = (/5,30,98,144/)
+    x= 0.d0
+    AB(1:n, 1:n) = A
+    AB(1:n, n+1) = B
+    
+    !algoritmo
+    
+    do k=1, n-1
+        !bucle por filas debajo de la diagonal
+         do i=k+1, n
+             m = AB(i,k)/AB(k,k)
+             AB(i,:) = AB(i,:)-m*AB(k,:)
+                do j=k, n+1
+                    Ab(i,j)=AB(i,j)-
+         enddo
+    enddo
+    
+    do i=1, n
+        write(*,fmt=(6(f6.3,1x))') AB(i,:)
+    enddo
+    
+    ! II  sustitucion
+    ! bucle por elementos en la diagonal de abajo a arriba
+   do k=n,1,-1
+       m= 0.d0
+         do i=k+1, n
+             m= m + AB(k) *X(i)
+            enddo
+        X(k) = (AB(k,n+1)-m)/AB(k,k)
+    enddo 
+
+    end program Gauss
